@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="ملاذ — بوابة إحصائيات مجتمع Discord العربي" />
+  <title>ملاذ | إحصائيات المجتمع</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header"><nav class="nav wrap">
+    <a class="brand" href="#top"><b>م</b><span><strong>مـلاذ</strong><small>مجتمعك، مكانك الآمن</small></span></a>
+    <div class="navlinks"><a href="#stats">الإحصائيات</a><a href="#leaderboard">لوحة الشرف</a><a href="#ranks">الرتب</a></div>
+    <a class="gold-btn" href="#search">استكشف السيرفر</a>
+  </nav></header>
+
+  <main id="top">
+    <section class="hero"><div class="hero-bg"></div><div class="hero-inner wrap">
+      <div class="hero-profile"><div class="server-avatar">م</div><div><span class="eyebrow">● مجتمع عربي نابض بالحياة</span><h1>مرحباً بك في <em>ملاذ</em></h1><p>اكتشف إحصائياتك، تقدمك، ورتبتك بين أعضاء المجتمع. كل إنجاز لك يستحق أن يُرى.</p><div class="meta">✦ بإشراف فهد المطيري <i>•</i> أكثر من 2,400 عضو</div></div></div>
+      <div class="seal">م</div>
+    </div></section>
+
+    <section class="search wrap" id="search"><div class="glass search-card"><div class="search-title"><b>⌕</b><div><span class="eyebrow">البحث العام</span><h2>اعرف مكانك في ملاذ</h2><p>ابحث باستخدام اسم العضو أو اليوزر — بدون تسجيل دخول.</p></div></div><div class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="اكتب اسم العضو أو اليوزر..." autocomplete="off"/><button id="clearSearch">×</button><div id="suggestions"></div></div></div></section>
+
+    <section class="section wrap" id="stats"><div class="section-head"><div><span class="eyebrow">ملف العضو</span><h2>إحصائيات <em id="titleName">فهد المطيري</em></h2></div><button class="outline" id="copyLink">⧉ نسخ رابط البروفايل</button></div>
+      <div class="member-layout"><aside class="glass profile"><div class="cover"></div><div class="avatar-wrap"><img id="avatar" alt="صورة العضو"/><i></i></div><div class="profile-body"><h3 id="name">فهد المطيري <sup>✓</sup></h3><p id="username">@fahad</p><div id="badges" class="badges"></div><hr/><dl><div><dt>الرتبة الحالية</dt><dd id="rank">الملاذ الملكي</dd></div><div><dt>تاريخ الانضمام</dt><dd id="joined">12 يناير 2024</dd></div></dl><button class="gold-btn full" id="shareLink">⧉ مشاركة الملف</button></div></aside>
+        <div class="stats-content"><div class="metrics"><article class="metric glass"><b>✉</b><span>إجمالي الرسائل</span><strong id="messages">0</strong><small>منذ الانضمام</small></article><article class="metric glass"><b>＠</b><span>منشن للآخرين</span><strong id="sent">0</strong><small>تفاعل اجتماعي</small></article><article class="metric glass"><b>♢</b><span>تم منشنه</span><strong id="received">0</strong><small>مرات التفاعل معك</small></article><article class="metric glass"><b>◷</b><span>وقت الفويس</span><strong id="voice">0</strong><small>إجمالي التواجد</small></article></div>
+          <article class="glass progress-card"><div class="level-head"><div><span class="eyebrow">نظام التقدم</span><h3>رحلتك في ملاذ</h3></div><strong>LVL <em id="level">42</em></strong></div><div class="progress-info"><span>التقدم إلى المستوى التالي</span><b><i id="xp">0</i> / <i id="nextXp">0</i> XP</b></div><div class="progress"><i id="progress"></i></div><div class="progress-foot"><span>الرتبة القادمة: <b id="nextRank">أسطورة ملاذ</b></span><b id="percent">0%</b></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section wrap" id="leaderboard"><div class="section-head"><div><span class="eyebrow">المنافسة الشريفة</span><h2>لوحة الشرف</h2><p>أكثر أعضاء ملاذ تفاعلاً وحضوراً.</p></div><div class="tabs"><button class="active" data-board="chat">الأكثر تفاعلاً</button><button data-board="voice">الأكثر حضوراً</button></div></div><div class="leader-grid"><div class="glass podium"><span>♛</span><img id="topAvatar" alt="المتصدر"/><small>01</small><h3 id="topName">—</h3><b id="topScore">—</b><label>المتصدر</label></div><div class="glass list" id="leaderList"></div></div></section>
+
+    <section class="section wrap" id="ranks"><div class="section-head"><div><span class="eyebrow">نظام المستويات</span><h2>سُلّم رتب ملاذ</h2><p>كل رتبة تمنحك حضوراً ومميزات أوسع داخل المجتمع.</p></div></div><div class="rank-grid" id="rankGrid"></div></section>
+    <section class="section wrap"><div class="cta"><div><span class="eyebrow">هل أنت مستعد؟</span><h2>مكانك محفوظ في ملاذ</h2><p>انضم إلى مجتمعنا وابدأ رحلتك نحو قمة لوحة الشرف.</p></div><a class="gold-btn" href="https://discord.com" target="_blank" rel="noopener">انضم إلى السيرفر ←</a></div></section>
+  </main>
+  <footer><div class="wrap foot"><a class="brand" href="#top"><b>م</b><span><strong>مـلاذ</strong><small>مجتمعك، مكانك الآمن</small></span></a><p>© <span id="year"></span> ملاذ. بإشراف فهد المطيري.</p><a href="#top">العودة للأعلى ↑</a></div></footer>
+  <div class="toast" id="toast">✓ <span>تم نسخ الرابط بنجاح</span></div>
+  <script src="app.js"></script>
+</body></html>
