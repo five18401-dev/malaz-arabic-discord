@@ -26,9 +26,9 @@
     <section class="search wrap" id="search"><div class="glass search-card"><div class="search-title"><b>⌕</b><div><span class="eyebrow">البحث العام</span><h2>اعرف مكانك في ملاذ</h2></div></div><div class="search-box"><input id="searchInput" type="text" placeholder="ابحث عن اسم العضو أو المعرف..." aria-label="بحث" /><button id="clearSearch" class="ghost" type="button">×</button></div><div id="suggestions" class="suggestions" aria-live="polite"></div></div></section>
 
     <section class="section wrap" id="stats"><div class="section-head"><div><span class="eyebrow">ملف العضو</span><h2>إحصائيات <em id="titleName">فهد المطيري</em></h2></div><a href="#search" class="text-link">تغيير العضو</a></div>
-      <div class="member-layout"><aside class="glass profile"><div class="cover"></div><div class="avatar-wrap"><img id="avatar" alt="صورة العضو" /><i></i></div><div class="profile-body"><div class="title-row"><div><h3 id="name">فهد المطيري <sup>✓</sup></h3><small id="username">@fahad</small></div><span class="pill" id="rankPill">الملاذ الملكي</span></div><ul class="meta-list"><li><b>انضم</b><span id="joined">12 يناير 2024</span></li><li><b>الرتبة</b><span id="rank">الملاذ الملكي</span></li><li><b>المستوى</b><span id="levelText">LVL 42</span></li></ul></div></aside>
-        <div class="stats-content"><div class="metrics"><article class="metric glass"><b>✉</b><span>إجمالي الرسائل</span><strong id="messages">0</strong><small>منذ الانضمام</small></article><article class="metric glass"><b>🎧</b><span>وقت الصوت</span><strong id="voice">0</strong><small>دقائق متراكمة</small></article><article class="metric glass"><b>⚡</b><span>نقاط الخبرة</span><strong id="xp">0</strong><small>XP</small></article></div>
-          <article class="glass progress-card"><div class="level-head"><div><span class="eyebrow">نظام التقدم</span><h3>رحلتك في ملاذ</h3></div><strong>LVL <em id="level">42</em></strong></div><div class="progress"><i id="progressFill"></i></div><div class="progress-meta"><span>أكمل <strong id="xpProgress">0%</strong> من المسار</span><span id="nextLevel">المرحلة التالية: LVL 43</span></div></article>
+      <div class="member-layout"><aside class="glass profile"><div class="cover"></div><div class="avatar-wrap"><img id="avatar" alt="صورة العضو" /><i></i></div><div class="profile-body"><div class="title-row"><div><h3 id="name">فهد المطيري <sup>✓</sup></h3><small id="username">@fahad</small></div><span class="pill" id="rankPill">الملاذ الملكي</span></div><div class="perms" id="permsList"></div><ul class="meta-list"><li><b>انضم</b><span id="joined">12 يناير 2024</span></li><li><b>الرتبة</b><span id="rank">الملاذ الملكي</span></li><li><b>المستوى</b><span id="levelText">LVL 42</span></li><li><b>ترتيب الرتبة</b><span id="rankPosition">-</span></li></ul></div></aside>
+        <div class="stats-content"><div class="metrics"><article class="metric glass"><b>✉</b><span>إجمالي الرسائل</span><strong id="messages">0</strong><small>منذ الانضمام</small></article><article class="metric glass"><b>🎧</b><span>وقت الصوت</span><strong id="voice">0</strong><small>دقائق متراكمة</small></article><article class="metric glass"><b>⚡</b><span>نقاط الخبرة</span><strong id="xp">0</strong><small>XP</small></article><article class="metric glass"><b>@</b><span>مرات المنشن</span><strong id="mentionsGiven">0</strong><small>أشار لأعضاء آخرين</small></article><article class="metric glass"><b>#</b><span>مرات الإشارة له</span><strong id="mentionsReceived">0</strong><small>تم ذكره من الأعضاء</small></article></div>
+          <article class="glass progress-card"><div class="level-head"><div><span class="eyebrow">نظام التقدم</span><h3>رحلتك في ملاذ</h3></div><strong>LVL <em id="level">42</em></strong></div><div class="progress"><i id="progressFill"></i></div><div class="progress-meta"><span>أكمل <strong id="xpProgress">0%</strong> من المسار</span><span id="nextLevel">المرحلة التالية: LVL 43</span></div><div class="progress-meta"><span>الرتبة القادمة: <strong id="nextRankName">-</strong></span><span id="nextRankRemaining">الباقي: -</span></div></article>
         </div>
       </div>
     </section>
@@ -44,10 +44,11 @@
     <section class="section wrap"><div class="cta"><div><span class="eyebrow">هل أنت مستعد؟</span><h2>مكانك محفوظ في ملاذ</h2><p>انضم إلى مجتمعنا وابدأ رحلتك في تجربة تفاعلية، متكاملة، ومميزة.</p></div><a class="gold-btn" href="#search">استكشف السيرفر الآن</a></div></section>
   </main>
 
-  <footer><div class="wrap foot"><a class="brand" href="#top"><b>م</b><span><strong>مـلاذ</strong><small>مجتمعك، مكانك الآمن</small></span></a><p>© <span id="year"></span> ملاذ. جميع الحقوق محفوظة.</p></div></footer>
+  <footer><div class="wrap foot"><a class="brand" href="#top"><b>م</b><span><strong>مـلاذ</strong><small>مجتمعك، مكانك الآمن</small></span></a><p>© <span id="year"></span> ملاذ. جميع الحقوق محفوظة. تصميم الموقع: فهد المطيري</p></div></footer>
   <div class="toast" id="toast">✓ <span>تم نسخ الرابط بنجاح</span></div>
   <script>
-    window.MALAZ_API_URL = "https://malaz-railway-bot-api-production.up.railway.app";
+    // ضع هنا رابط تطبيق البوت على Replit، مثل: https://your-bot-name.your-username.repl.co
+    window.MALAZ_API_URL = "";
   </script>
   <script src="api-client.js"></script>
   <script src="app.js"></script>
