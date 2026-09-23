@@ -1,30 +1,131 @@
 "use strict";
-/* نسخة الواجهة الحالية تعمل ببيانات تجريبية. لا تضع Bot Token هنا أبداً. */
-const members=[
- {id:'fahad',name:'فهد المطيري',username:'@fahad',avatar:'https://i.pravatar.cc/300?img=12',rank:'الملاذ الملكي',joined:'12 يناير 2024',messages:24860,sent:1240,received:1850,voice:3620,level:42,xp:8420,nextXp:10000,nextRank:'أسطورة ملاذ',badges:['المنشئ','عضو مميز','متصدر']},
- {id:'noura',name:'نورة',username:'@noura',avatar:'https://i.pravatar.cc/300?img=47',rank:'أسطورة ملاذ',joined:'21 فبراير 2024',messages:21300,sent:980,received:1400,voice:4200,level:38,xp:7250,nextXp:9000,nextRank:'الملاذ الملكي',badges:['عضو مميز','روح الفريق']},
- {id:'saad',name:'سعد العنزي',username:'@saad',avatar:'https://i.pravatar.cc/300?img=68',rank:'المشرف',joined:'02 مارس 2024',messages:18900,sent:870,received:1120,voice:3180,level:34,xp:6500,nextXp:8000,nextRank:'أسطورة ملاذ',badges:['مشرف','متفاعل']},
- {id:'lama',name:'لما',username:'@lama',avatar:'https://i.pravatar.cc/300?img=44',rank:'الذهبي',joined:'13 أبريل 2024',messages:15600,sent:760,received:940,voice:2900,level:29,xp:5200,nextXp:7000,nextRank:'المشرف',badges:['متفاعل']},
- {id:'turki',name:'تركي',username:'@turki',avatar:'https://i.pravatar.cc/300?img=11',rank:'الفضي',joined:'25 مايو 2024',messages:11900,sent:510,received:720,voice:2440,level:24,xp:3900,nextXp:5500,nextRank:'الذهبي',badges:['عضو مميز']},
- {id:'reem',name:'ريم',username:'@reem',avatar:'https://i.pravatar.cc/300?img=32',rank:'الفضي',joined:'10 يونيو 2024',messages:9300,sent:420,received:610,voice:2050,level:21,xp:3200,nextXp:5000,nextRank:'الذهبي',badges:['روح الفريق']}
+
+const $ = (selector) => document.querySelector(selector);
+const $$ = (selector) => [...document.querySelectorAll(selector)];
+const fmt = (value) => new Intl.NumberFormat("ar-SA").format(Number(value || 0));
+const voiceTime = (minutes) => `${fmt(Math.floor(Number(minutes || 0) / 60))} س ${fmt(Number(minutes || 0) % 60)} د`;
+
+let members = [];
+let selected = null;
+let board = "chat";
+
+const fallbackRanks = [
+  { level: "LVL 40+", name: "الملاذ الملكي", icon: "♛", color: "#f1c96d", desc: "أعلى رتبة تقديرية لأكثر الأعضاء تأثيراً وحضوراً." },
+  { level: "LVL 35+", name: "أسطورة ملاذ", icon: "✦", color: "#c58aff", desc: "رتبة نادرة للأعضاء الذين تركوا بصمتهم في المجتمع." },
+  { level: "LVL 30+", name: "المشرف", icon: "◆", color: "#6dc7f1", desc: "أعضاء موثوقون يساعدون في تنظيم وتطوير المجتمع." },
+  { level: "LVL 25+", name: "الذهبي", icon: "◈", color: "#e2a958", desc: "عضو متفاعل يساهم باستمرار في مختلف قنوات ملاذ." },
+  { level: "LVL 15+", name: "الفضي", icon: "◇", color: "#b8c4d2", desc: "مرحلة التقدم الأولى للأعضاء النشطين في المجتمع." },
+  { level: "LVL 1+", name: "عضو ملاذ", icon: "○", color: "#8c8d96", desc: "الرتبة الأساسية لكل عضو جديد في السيرفر." }
 ];
-const ranks=[
- {level:'LVL 40+',name:'الملاذ الملكي',icon:'♛',color:'#f1c96d',desc:'أعلى رتبة تقديرية لأكثر الأعضاء تأثيراً وحضوراً.',perms:['شارة ملكية','أولوية الفعاليات','قناة خاصة']},
- {level:'LVL 35+',name:'أسطورة ملاذ',icon:'✦',color:'#c58aff',desc:'رتبة نادرة للأعضاء الذين تركوا بصمتهم في المجتمع.',perms:['لون مخصص','قنوات خاصة','تصويت مميز']},
- {level:'LVL 30+',name:'المشرف',icon:'◆',color:'#6dc7f1',desc:'أعضاء موثوقون يساعدون في تنظيم وتطوير المجتمع.',perms:['إدارة النقاش','تنظيم الفعاليات','شارة إشراف']},
- {level:'LVL 25+',name:'الذهبي',icon:'◈',color:'#e2a958',desc:'عضو متفاعل يساهم باستمرار في مختلف قنوات ملاذ.',perms:['لون ذهبي','دخول فعاليات','شارة ذهبية']},
- {level:'LVL 15+',name:'الفضي',icon:'◇',color:'#b8c4d2',desc:'مرحلة التقدم الأولى للأعضاء النشطين في المجتمع.',perms:['شارة فضية','مكافآت أسبوعية']},
- {level:'LVL 1+',name:'عضو ملاذ',icon:'○',color:'#8c8d96',desc:'الرتبة الأساسية لكل عضو جديد في السيرفر.',perms:['الوصول العام','النقاشات']}
-];
-let selected=members[0],board='chat';
-const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s), fmt=n=>new Intl.NumberFormat('ar-SA').format(n);
-const voiceTime=m=>`${fmt(Math.floor(m/60))} س ${fmt(m%60)} د`;
-function animate(el,to,format=fmt){const from=Number(el.dataset.value||0),start=performance.now();function tick(now){const p=Math.min((now-start)/600,1),e=1-Math.pow(1-p,3),v=Math.round(from+(to-from)*e);el.textContent=format(v);el.dataset.value=v;if(p<1)requestAnimationFrame(tick)}requestAnimationFrame(tick)}
-function renderMember(m){selected=m;$('#titleName').textContent=m.name;$('#name').innerHTML=`${m.name} <sup>✓</sup>`;$('#username').textContent=m.username;$('#avatar').src=m.avatar;$('#avatar').alt=`صورة ${m.name}`;$('#rank').textContent=m.rank;$('#joined').textContent=m.joined;$('#badges').innerHTML=m.badges.map(x=>`<span class="badge">${x}</span>`).join('');animate($('#messages'),m.messages);animate($('#sent'),m.sent);animate($('#received'),m.received);animate($('#voice'),m.voice,voiceTime);$('#level').textContent=m.level;$('#xp').textContent=fmt(m.xp);$('#nextXp').textContent=fmt(m.nextXp);$('#nextRank').textContent=m.nextRank;const p=Math.min(100,Math.round(m.xp/m.nextXp*100));$('#progress').style.width=p+'%';$('#percent').textContent=p+'%'}
-function suggestions(term=''){const t=term.trim().toLowerCase(),arr=t?members.filter(m=>m.name.toLowerCase().includes(t)||m.username.toLowerCase().includes(t)):members.slice(0,5);$('#suggestions').innerHTML=arr.length?arr.map(m=>`<button class="suggestion" data-id="${m.id}"><img src="${m.avatar}" alt=""><span><strong>${m.name}</strong><small>${m.username} · ${m.rank}</small></span></button>`).join(''):'<div class="suggestion"><span><strong>لا توجد نتائج</strong><small>تأكد من الاسم</small></span></div>';$('#suggestions').classList.add('open')}
-function renderBoard(){const arr=[...members].sort((a,b)=>board==='voice'?b.voice-a.voice:b.messages-a.messages),top=arr[0];$('#topAvatar').src=top.avatar;$('#topName').textContent=top.name;$('#topScore').textContent=board==='voice'?voiceTime(top.voice):`${fmt(top.messages)} رسالة`;$('#leaderList').innerHTML=arr.slice(1).map((m,i)=>`<div class="leader"><span>${String(i+2).padStart(2,'0')}</span><img src="${m.avatar}" alt=""><div><strong>${m.name}</strong><small>${m.username}</small></div><b>${board==='voice'?voiceTime(m.voice):fmt(m.messages)+' رسالة'}</b></div>`).join('')}
-function renderRanks(){$('#rankGrid').innerHTML=ranks.map(r=>`<article class="rank" style="--c:${r.color}"><div class="rank-head"><b class="rank-icon">${r.icon}</b><small>${r.level}</small></div><h3>${r.name}</h3><p>${r.desc}</p><div class="perms">${r.perms.map(p=>`<span>${p}</span>`).join('')}</div></article>`).join('')}
-function toast(msg){$('#toast span').textContent=msg;$('#toast').classList.add('show');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>$('#toast').classList.remove('show'),2500)}
-async function copy(){const url=`${location.origin}${location.pathname}#profile=${selected.id}`;try{await navigator.clipboard.writeText(url)}catch{const i=document.createElement('input');i.value=url;document.body.append(i);i.select();document.execCommand('copy');i.remove()}toast('تم نسخ رابط البروفايل')}
-$('#searchInput').addEventListener('input',e=>{ $('#clearSearch').style.display=e.target.value?'block':'none';suggestions(e.target.value)});$('#searchInput').addEventListener('focus',()=>suggestions($('#searchInput').value));$('#clearSearch').addEventListener('click',()=>{$('#searchInput').value='';$('#clearSearch').style.display='none';$('#suggestions').classList.remove('open')});$('#suggestions').addEventListener('click',e=>{const b=e.target.closest('[data-id]');if(!b)return;selected=members.find(m=>m.id===b.dataset.id);renderMember(selected);$('#searchInput').value=selected.name;$('#suggestions').classList.remove('open');$('#stats').scrollIntoView({behavior:'smooth'})});document.addEventListener('click',e=>{if(!e.target.closest('.search-box'))$('#suggestions').classList.remove('open')});$('#copyLink').onclick=copy;$('#shareLink').onclick=copy;$$('.tabs button').forEach(b=>b.onclick=()=>{$$('.tabs button').forEach(x=>x.classList.remove('active'));b.classList.add('active');board=b.dataset.board;renderBoard()});renderMember(selected);renderBoard();renderRanks();$('#year').textContent=new Date().getFullYear();
-const hash=new URLSearchParams(location.hash.replace('#','?')).get('profile');if(hash){const m=members.find(x=>x.id===hash);if(m){renderMember(m);$('#searchInput').value=m.name}}
+
+function toast(message) {
+  const element = $("#toast");
+  if (!element) return;
+  const text = element.querySelector("span");
+  if (text) text.textContent = message;
+  element.classList.add("show");
+  clearTimeout(window.toastTimer);
+  window.toastTimer = setTimeout(() => element.classList.remove("show"), 2500);
+}
+
+function normalizeMember(member) {
+  return {
+    ...member,
+    username: member.username?.startsWith("@") ? member.username : `@${member.username || member.id}`,
+    joined: member.joined || (member.joinedAt ? new Date(member.joinedAt).toLocaleDateString("ar-SA") : "غير معروف"),
+    messages: Number(member.messages || 0),
+    voice: Number(member.voice || 0),
+    xp: Number(member.xp || 0),
+    level: Number(member.level || 1),
+    rank: member.rank || "عضو ملاذ"
+  };
+}
+
+function renderMember(member) {
+  if (!member) return;
+  selected = member;
+  const set = (selector, value) => { const el = $(selector); if (el) el.textContent = value; };
+  set("#titleName", member.name);
+  const name = $("#name");
+  if (name) name.innerHTML = `${member.name} <sup>✓</sup>`;
+  set("#username", member.username);
+  set("#joined", member.joined);
+  set("#rank", member.rank);
+  set("#rankPill", member.rank);
+  set("#level", member.level);
+  set("#levelText", `LVL ${member.level}`);
+  set("#messages", fmt(member.messages));
+  set("#voice", voiceTime(member.voice));
+  set("#xp", fmt(member.xp));
+  set("#xpProgress", `${Math.min(100, Math.round((member.xp % 10000) / 100))}%`);
+  set("#nextLevel", `المرحلة التالية: LVL ${member.level + 1}`);
+  const avatar = $("#avatar");
+  if (avatar) avatar.src = member.avatar || "https://cdn.discordapp.com/embed/avatars/0.png";
+  const progress = $("#progressFill");
+  if (progress) progress.style.width = `${Math.min(100, Math.round((member.xp % 10000) / 100))}%`;
+}
+
+function renderSuggestions(term = "") {
+  const container = $("#suggestions");
+  if (!container) return;
+  const query = term.trim().toLowerCase();
+  const results = (query ? members.filter((m) => `${m.name} ${m.username}`.toLowerCase().includes(query)) : members).slice(0, 5);
+  container.innerHTML = results.map((member) => `<button type="button" data-member-id="${member.id}">${member.name}<small>${member.username}</small></button>`).join("");
+  container.querySelectorAll("[data-member-id]").forEach((button) => button.addEventListener("click", () => {
+    const member = members.find((item) => item.id === button.dataset.memberId);
+    renderMember(member);
+    const input = $("#searchInput");
+    if (input) input.value = member.name;
+  }));
+}
+
+function renderBoard() {
+  const sorted = [...members].sort((a, b) => board === "voice" ? b.voice - a.voice : b.messages - a.messages);
+  const top = sorted[0];
+  if (!top) return;
+  const topAvatar = $("#topAvatar");
+  if (topAvatar) topAvatar.src = top.avatar || "https://cdn.discordapp.com/embed/avatars/0.png";
+  const topName = $("#topName");
+  if (topName) topName.textContent = top.name;
+  const topMeta = $("#topMeta");
+  if (topMeta) topMeta.textContent = board === "voice" ? voiceTime(top.voice) : `${fmt(top.messages)} رسالة`;
+  const list = $("#boardList");
+  if (list) list.innerHTML = sorted.slice(0, 10).map((member, index) => `<li><b>${index + 1}</b><img src="${member.avatar || "https://cdn.discordapp.com/embed/avatars/0.png"}" alt=""><span>${member.name}</span><strong>${board === "voice" ? voiceTime(member.voice) : fmt(member.messages)}</strong></li>`).join("");
+}
+
+function renderRanks(roles = []) {
+  const list = roles.length ? roles.map((role, index) => ({ level: `LVL ${Math.max(1, roles.length - index)}+`, name: role.name, icon: "◆", color: role.color || "#c58aff", desc: "رتبة من رتب مجتمع ملاذ." })) : fallbackRanks;
+  const grid = $("#rankGrid");
+  if (grid) grid.innerHTML = list.map((rank) => `<article class="rank" style="--c:${rank.color}"><div class="rank-head"><b class="rank-icon">${rank.icon}</b><small>${rank.level}</small></div><h3>${rank.name}</h3><p>${rank.desc}</p></article>`).join("");
+}
+
+async function loadLiveData() {
+  if (!window.MalazAPI?.enabled) return;
+  try {
+    const [membersResponse, rolesResponse] = await Promise.all([window.MalazAPI.members(), window.MalazAPI.roles()]);
+    if (Array.isArray(membersResponse.members)) members = membersResponse.members.map(normalizeMember);
+    if (members.length) {
+      selected = members[0];
+      renderMember(selected);
+      renderSuggestions();
+      renderBoard();
+    }
+    renderRanks(Array.isArray(rolesResponse.roles) ? rolesResponse.roles : []);
+  } catch (error) {
+    console.error("Unable to load live Discord data:", error);
+    toast("تعذر تحميل بيانات Discord حالياً");
+  }
+}
+
+$("#searchInput")?.addEventListener("input", (event) => renderSuggestions(event.target.value));
+$("#clearSearch")?.addEventListener("click", () => { $("#searchInput").value = ""; renderSuggestions(); });
+$$("[data-board]").forEach((button) => button.addEventListener("click", () => {
+  board = button.dataset.board;
+  $$('[data-board]').forEach((item) => item.classList.toggle("active", item === button));
+  renderBoard();
+}));
+
+const year = $("#year");
+if (year) year.textContent = new Date().getFullYear();
+renderRanks();
+loadLiveData();
