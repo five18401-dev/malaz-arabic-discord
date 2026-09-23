@@ -19,26 +19,37 @@
 
   <main id="top">
     <section class="hero"><div class="hero-bg"></div><div class="hero-inner wrap">
-      <div class="hero-profile"><div class="server-avatar">م</div><div><span class="eyebrow">● مجتمع عربي نابض بالحياة</span><h1>مرحباً بك في <em>ملاذ</em></h1><p>اكتشف إحصائياتك، تقدمك، ورتبتك بين أعضاء المجتمع. كل إنجاز لك يستحق أن يُرى.</p><div class="meta">✦ بإشراف فهد المطيري <i>•</i> أكثر من 2,400 عضو</div></div></div>
+      <div class="hero-profile"><div class="server-avatar">م</div><div><span class="eyebrow">● مجتمع عربي نابض بالحياة</span><h1>مرحباً بك في <em>ملاذ</em></h1><p>بوابة إحصائيات المجتمع العربي، تجمع القيم، التفاعل، والإنجاز في مساحة واحدة.</p></div></div>
       <div class="seal">م</div>
     </div></section>
 
-    <section class="search wrap" id="search"><div class="glass search-card"><div class="search-title"><b>⌕</b><div><span class="eyebrow">البحث العام</span><h2>اعرف مكانك في ملاذ</h2><p>ابحث باستخدام اسم العضو أو اليوزر — بدون تسجيل دخول.</p></div></div><div class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="اكتب اسم العضو أو اليوزر..." autocomplete="off"/><button id="clearSearch">×</button><div id="suggestions"></div></div></div></section>
+    <section class="search wrap" id="search"><div class="glass search-card"><div class="search-title"><b>⌕</b><div><span class="eyebrow">البحث العام</span><h2>اعرف مكانك في ملاذ</h2></div></div><div class="search-box"><input id="searchInput" type="text" placeholder="ابحث عن اسم العضو أو المعرف..." aria-label="بحث" /><button id="clearSearch" class="ghost" type="button">×</button></div><div id="suggestions" class="suggestions" aria-live="polite"></div></div></section>
 
-    <section class="section wrap" id="stats"><div class="section-head"><div><span class="eyebrow">ملف العضو</span><h2>إحصائيات <em id="titleName">فهد المطيري</em></h2></div><button class="outline" id="copyLink">⧉ نسخ رابط البروفايل</button></div>
-      <div class="member-layout"><aside class="glass profile"><div class="cover"></div><div class="avatar-wrap"><img id="avatar" alt="صورة العضو"/><i></i></div><div class="profile-body"><h3 id="name">فهد المطيري <sup>✓</sup></h3><p id="username">@fahad</p><div id="badges" class="badges"></div><hr/><dl><div><dt>الرتبة الحالية</dt><dd id="rank">الملاذ الملكي</dd></div><div><dt>تاريخ الانضمام</dt><dd id="joined">12 يناير 2024</dd></div></dl><button class="gold-btn full" id="shareLink">⧉ مشاركة الملف</button></div></aside>
-        <div class="stats-content"><div class="metrics"><article class="metric glass"><b>✉</b><span>إجمالي الرسائل</span><strong id="messages">0</strong><small>منذ الانضمام</small></article><article class="metric glass"><b>＠</b><span>منشن للآخرين</span><strong id="sent">0</strong><small>تفاعل اجتماعي</small></article><article class="metric glass"><b>♢</b><span>تم منشنه</span><strong id="received">0</strong><small>مرات التفاعل معك</small></article><article class="metric glass"><b>◷</b><span>وقت الفويس</span><strong id="voice">0</strong><small>إجمالي التواجد</small></article></div>
-          <article class="glass progress-card"><div class="level-head"><div><span class="eyebrow">نظام التقدم</span><h3>رحلتك في ملاذ</h3></div><strong>LVL <em id="level">42</em></strong></div><div class="progress-info"><span>التقدم إلى المستوى التالي</span><b><i id="xp">0</i> / <i id="nextXp">0</i> XP</b></div><div class="progress"><i id="progress"></i></div><div class="progress-foot"><span>الرتبة القادمة: <b id="nextRank">أسطورة ملاذ</b></span><b id="percent">0%</b></div></article>
+    <section class="section wrap" id="stats"><div class="section-head"><div><span class="eyebrow">ملف العضو</span><h2>إحصائيات <em id="titleName">فهد المطيري</em></h2></div><a href="#search" class="text-link">تغيير العضو</a></div>
+      <div class="member-layout"><aside class="glass profile"><div class="cover"></div><div class="avatar-wrap"><img id="avatar" alt="صورة العضو" /><i></i></div><div class="profile-body"><div class="title-row"><div><h3 id="name">فهد المطيري <sup>✓</sup></h3><small id="username">@fahad</small></div><span class="pill" id="rankPill">الملاذ الملكي</span></div><ul class="meta-list"><li><b>انضم</b><span id="joined">12 يناير 2024</span></li><li><b>الرتبة</b><span id="rank">الملاذ الملكي</span></li><li><b>المستوى</b><span id="levelText">LVL 42</span></li></ul></div></aside>
+        <div class="stats-content"><div class="metrics"><article class="metric glass"><b>✉</b><span>إجمالي الرسائل</span><strong id="messages">0</strong><small>منذ الانضمام</small></article><article class="metric glass"><b>🎧</b><span>وقت الصوت</span><strong id="voice">0</strong><small>دقائق متراكمة</small></article><article class="metric glass"><b>⚡</b><span>نقاط الخبرة</span><strong id="xp">0</strong><small>XP</small></article></div>
+          <article class="glass progress-card"><div class="level-head"><div><span class="eyebrow">نظام التقدم</span><h3>رحلتك في ملاذ</h3></div><strong>LVL <em id="level">42</em></strong></div><div class="progress"><i id="progressFill"></i></div><div class="progress-meta"><span>أكمل <strong id="xpProgress">0%</strong> من المسار</span><span id="nextLevel">المرحلة التالية: LVL 43</span></div></article>
         </div>
       </div>
     </section>
 
-    <section class="section wrap" id="leaderboard"><div class="section-head"><div><span class="eyebrow">المنافسة الشريفة</span><h2>لوحة الشرف</h2><p>أكثر أعضاء ملاذ تفاعلاً وحضوراً.</p></div><div class="tabs"><button class="active" data-board="chat">الأكثر تفاعلاً</button><button data-board="voice">الأكثر حضوراً</button></div></div><div class="leader-grid"><div class="glass podium"><span>♛</span><img id="topAvatar" alt="المتصدر"/><small>01</small><h3 id="topName">—</h3><b id="topScore">—</b><label>المتصدر</label></div><div class="glass list" id="leaderList"></div></div></section>
+    <section class="section wrap" id="leaderboard"><div class="section-head"><div><span class="eyebrow">المنافسة الشريفة</span><h2>لوحة الشرف</h2><p>أكثر أعضاء ملاذ نشاطاً وتفاعلاً داخل المجتمع.</p></div><div class="toggle"><button class="active" data-board="chat" type="button">الرسائل</button><button data-board="voice" type="button">الصوت</button></div></div>
+      <article class="glass leaderboard"><div class="leader-top"><div class="thumb"><img id="topAvatar" alt="أفضل عضو" src="" /></div><div><span class="eyebrow">الرقم 1</span><h3 id="topName">فهد المطيري</h3><p id="topMeta">24,860 رسالة</p></div></div><ul id="boardList" class="board-list"></ul></article>
+    </section>
 
-    <section class="section wrap" id="ranks"><div class="section-head"><div><span class="eyebrow">نظام المستويات</span><h2>سُلّم رتب ملاذ</h2><p>كل رتبة تمنحك حضوراً ومميزات أوسع داخل المجتمع.</p></div></div><div class="rank-grid" id="rankGrid"></div></section>
-    <section class="section wrap"><div class="cta"><div><span class="eyebrow">هل أنت مستعد؟</span><h2>مكانك محفوظ في ملاذ</h2><p>انضم إلى مجتمعنا وابدأ رحلتك نحو قمة لوحة الشرف.</p></div><a class="gold-btn" href="https://discord.com" target="_blank" rel="noopener">انضم إلى السيرفر ←</a></div></section>
+    <section class="section wrap" id="ranks"><div class="section-head"><div><span class="eyebrow">نظام المستويات</span><h2>سُلّم رتب ملاذ</h2><p>كل رتبة تمنحك تسمية خاصة، امتيازات داخل المجتمع، ووضوحاً في مستوى التفاعل.</p></div></div>
+      <div id="rankGrid" class="rank-grid"></div>
+    </section>
+
+    <section class="section wrap"><div class="cta"><div><span class="eyebrow">هل أنت مستعد؟</span><h2>مكانك محفوظ في ملاذ</h2><p>انضم إلى مجتمعنا وابدأ رحلتك في تجربة تفاعلية، متكاملة، ومميزة.</p></div><a class="gold-btn" href="#search">استكشف السيرفر الآن</a></div></section>
   </main>
-  <footer><div class="wrap foot"><a class="brand" href="#top"><b>م</b><span><strong>مـلاذ</strong><small>مجتمعك، مكانك الآمن</small></span></a><p>© <span id="year"></span> ملاذ. بإشراف فهد المطيري.</p><a href="#top">العودة للأعلى ↑</a></div></footer>
+
+  <footer><div class="wrap foot"><a class="brand" href="#top"><b>م</b><span><strong>مـلاذ</strong><small>مجتمعك، مكانك الآمن</small></span></a><p>© <span id="year"></span> ملاذ. جميع الحقوق محفوظة.</p></div></footer>
   <div class="toast" id="toast">✓ <span>تم نسخ الرابط بنجاح</span></div>
+  <script>
+    window.MALAZ_API_URL = "https://malaz-railway-bot-api-production.up.railway.app";
+  </script>
+  <script src="api-client.js"></script>
   <script src="app.js"></script>
-</body></html>
+</body>
+</html>
